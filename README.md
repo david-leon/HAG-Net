@@ -59,7 +59,7 @@ for argument details.
 | -label_col_name      | column name for labels, default = `label` |
 | -id_col_name         | column name for sample IDs, default = `ID` |
 | -sample_weight_col_name | column name for sample weights, default = `sample weight` |
-| -task                | classification / regression / prediction. If your dataset is for inference, set `-task` to `prediction` |
+| -task                | classification / prediction. If your dataset is for inference, set `-task` to `prediction` |
 | -feature_ver         | featurizer version, default = `2`. `2` means graph output, `1` means kekulized SMILES output and `0` means DeepChem's fingerprint | 
 | -use_chirality       | whether consider chirality for feature ver `0` and scaffold analysis |
 | -addH                | whether add back hydrogen atoms when canonicalize molecule |
@@ -82,7 +82,7 @@ Preprocessed data, as well as trainset & testset for training & evaluation, will
 
 
 ## Training
-For model training, use `ligand_based_VS_train.py`. Both classification and regression tasks are supported.  
+For model training, use `ligand_based_VS_train.py`.  
 Check
 ```
 python ligand_based_VS_train.py --help
@@ -94,17 +94,17 @@ for argument details.
 | -device              | int, -1 means CPU, >=0 means GPU                                     |
 | -model_file          | file path of initial model weights, default = `None`                 |
 | -model_ver           | model version, default = `4v4`                                       |
-| -class_num           | class number, default = `2`; for regression task, set it to `1`, refer to [Regression Metrics](#regression-metrics) for regression metric details |      |
+| -class_num           | class number, default = `2` |      |
 | -optimizer           | `sgd`/`adam`/`adadelta`, default is an SGD optimizer with lr = 1e-2 and momentum = 0.1, you can change learning rate via `-lr` argument |                                                    |
 | -trainset            | file path of train set, saved in `.gpkl` format as in data preprocessing step, refer to [Data Format](#data-format) for data format details |
 | -testset             | either <br/> 1) file path of test set, saved in `.gpkl` format as in data preprocessing step, refer to [Data Format](#data-format) for data format details <br/> 2) float in range (0, 1.0), this value will be used as partition ratio <br/> note in [Multi-fold Cross Valication](#multi-fold-cross-validation), this input will be ignored |
 | -batch_size <br/> -batch_size_min | the max & min sample number for a training batch. You can set them to different values to enable variable training batch size, this will help mitigate batch size effect if your model's performance is correlated to the size of training batch |
 | -batch_size_test     | sample number for a test batch, this size is fixed               | 
-| -ER_start_test <br/> -RMSE_start_test     | float, ER threshold below which the periodic test will be executed, for classification task <br/> float, RMSE threshold below which the periodic test will be executed, for regression task  |
+| -ER_start_test  | float, ER threshold below which the periodic test will be executed, for classification task  |
 | -max_epoch_num       | max training epoch number |
 | -save_model_per_epoch_num | float in (0.0, 1.0], default = `1.0`, means after training this portion of all training samples a checkpoint model file will be saved |
 | -test_model_per_epoch_num | float in (0.0, 1.0], default = `1.0`, means after training this portion of all training samples one round of test will be excuted     |
-| -save_root_folder    | root folder for training results saving, by default = `None`, <br/> **for plain training**  a `train_results` folder under the current direction will be used <br/> **for multi-fold cross validation**, a folder with name convention `train_results\<m>_fold_<task>_model_<model_ver>@<time_stamp>` will be used, in which `<m>` is the number of fold, `<task>` = `classification` / `regression`, `<model_ver>` is the model version string, `<time_stamp>` is the time stamp string meaning when the running is started <br/> **for grid search**,  a folder with name convention `train_results\grid_search_<model_ver>@<time_stamp>` will be used |
+| -save_root_folder    | root folder for training results saving, by default = `None`, <br/> **for plain training**  a `train_results` folder under the current direction will be used <br/> **for multi-fold cross validation**, a folder with name convention `train_results\<m>_fold_<task>_model_<model_ver>@<time_stamp>` will be used, in which `<m>` is the number of fold, `<task>` = `classification` , `<model_ver>` is the model version string, `<time_stamp>` is the time stamp string meaning when the running is started <br/> **for grid search**,  a folder with name convention `train_results\grid_search_<model_ver>@<time_stamp>` will be used |
 | -save_folder         | folder under the `save_root_folder`, under which one `train()` run results will be actually saved, by default = `None`, folder with name convention `[<prefix>]_ligand_VS_<task>_model_<model_ver>_pytorch@<time_stamp>` will be used, in which `<prefix>` is specified by input arg `-prefix` as below | 
 | -train_loader_worker | number of parallel loader worker for train set, default = `1`, increase this value if data loader takes more time than one batch training  |
 | -test_loader_worker  | number of parallel loader worker for test set, default = `1`, increase this value if data loader takes more time than one batch testing | 
@@ -130,7 +130,6 @@ for argument details.
     3) method 2: class weight equals to inverse of square root of class distribution of training samples, set input ars as `-weighting_method 2`
 
 ### Sample Weighting
-  * Sample-wise weighting for training is supported for both classification and regression tasks.
   * Note the metrics calculated on train set don't count in sample weights except for the `loss` metric; test set does not support sample weights at all; for meaningful test metric results, you should organize test samples with the same weights together, and sperately run test on test sets with different weights.
 
 ### Early Stop
