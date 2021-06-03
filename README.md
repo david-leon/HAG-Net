@@ -1,4 +1,5 @@
 # HAG-Net
+![HAG-Net Structure]((doc/HAG-Net_structure.png?raw=true))
 
 ## Contents
   * [Introduction](#introduction)
@@ -108,7 +109,6 @@ for argument details.
 | -save_folder         | folder under the `save_root_folder`, under which one `train()` run results will be actually saved, by default = `None`, folder with name convention `[<prefix>]_ligand_VS_<task>_model_<model_ver>_pytorch@<time_stamp>` will be used, in which `<prefix>` is specified by input arg `-prefix` as below | 
 | -train_loader_worker | number of parallel loader worker for train set, default = `1`, increase this value if data loader takes more time than one batch training  |
 | -test_loader_worker  | number of parallel loader worker for test set, default = `1`, increase this value if data loader takes more time than one batch testing | 
-| -balance_method      | method for different balance sampling, default = `0`, refer to [Balance Resampling](#balance-resampling) for details |
 | -weighting_method    | method for different class weighting, default = `0`, refer to [Class Weighting](#class-weighting) for details |
 | -prefix              | a convenient str flag to help you differentiate between different runs, by default = `None`, a prefix string `[model_<model_ver>]` will be used. This prefix string will be placed at the beginning of each on-screen output during training |
 | -config              | str, specify the `CONFIG` class name within `config.py`, the corresponding config set will be used for the training run. By default = `None`, the `model_<model_ver>_config` set will be used automatically |
