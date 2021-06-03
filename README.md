@@ -15,6 +15,7 @@
     * [Multi-fold Cross Validation](#multi-fold-cross-validation)
     * [Hyperparameter Tuning](#hyperparameter-tuning)
     * [Comparative Re-run](#comparative-re-run)
+  * [Cite Us](#cite-us)
 
 ## Introduction
 Code for ["Enhance Information Propagation for Graph Neural Network by Heterogeneous Aggregations"](https://arxiv.org/abs/2102.04064), also lite version of package for ligand-based virtual screening.
@@ -167,3 +168,14 @@ for argument details.
   * For plain training, trainset and testset will be loaded from `-srcfolder` for the new run
   * For [multi-fold cross validation](#multi-fold-cross-validation), both `trainset.gpkl` and `mfold_indexs.gpkl` will be loaded from `-srcfolder` for the new run
   * For [bundle training](#bundle-training), order of each run as well as trainset/testset for each run will be loaded from `-srcfolder`, and the new bundle training will be executed with the same order loaded.
+
+## Cite Us
+If you find this work useful, cite us by
+```
+@article{leng2021enhance,
+  title={Enhance Information Propagation for Graph Neural Network by Heterogeneous Aggregations},
+  author={Leng, Dawei and Guo, Jinjiang, etc.},
+  journal={arXiv preprint arXiv:2102.04064},
+  year={2021}
+}
+```
