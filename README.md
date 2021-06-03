@@ -1,5 +1,5 @@
 # HAG-Net
-![HAG-Net Structure]((doc/HAG-Net_structure.png?raw=true))
+![HAG-Net Structure](doc/HAG-Net_structure.png)
 
 ## Contents
   * [Introduction](#introduction)
